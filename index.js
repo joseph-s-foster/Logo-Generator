@@ -1,6 +1,6 @@
 const { prompt } = require("inquirer");
-const SVG = require("../library/svg");
-const { Circle, Triangle, Square } = require("../library/shapes");
+const SVG = require("./library/svg");
+const { Circle, Triangle, Square } = require("./library/shapes");
 const { writeFile } = require("fs/promises");
 
 prompt([
