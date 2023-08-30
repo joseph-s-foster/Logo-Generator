@@ -1,28 +1,36 @@
-class Shape {
-    constructor () {
-        this.color = "";
-    }
-    setColor(color) {
-        this.color = color;
-    }
-}
+const { prompt } = require("inquirer");
+const SVG = require("./library/svg");
+const { Circle, Triangle, Square } = require("./library/shapes");
+const { writeFile } = require("fs/promises");
 
-class Circle extends Shape {
-    render() {
-        return `<circle cx="150" cy="100" r="80" fill="${this.color}" />`;
+prompt([
+    {
+        type: "input", name: "text", message: "Input 3 characters or less."
+    },
+    {
+        type: "input", name: "textColor", message: "Choose a text color."
+    },
+    {
+        type: "list", name: "shape", message: "Choose a shape.", choices: ["Circle", "Triangle", "Square"]
+    },
+    {
+        type: "input", name: "shapeColor", message: "Choose a shape color."
     }
-}
+]).then(response => {
+    let shape;
+    if (response.shape === "Circle")
+        shape = new Circle();
+    else if (response.shape === "Triangle")
+        shape = new Triangle();
+    else
+        shape = new Square();
+    shape.setColor(response.shapeColor)
 
-class Triangle extends Shape {
-    render() {
-        return `<polygon points="150, 18 244, 182 56, 182" fill="${this.color}" />`;
-    }
-}
+    const svg = new SVG();
+    svg.setText(response.text, response.textColor);
+    svg.setShape(shape);
 
-class Square extends Shape {
-    render() {
-        return `<rect x="90" y="40" width="120" height="120" fill="${this.color}" />`;
-    }
-}
-
-module.exports = {Circle, Triangle, Square};
+    return writeFile("logo.svg", svg.render());
+}).then(() => {
+    console.log("Success!")
+});
