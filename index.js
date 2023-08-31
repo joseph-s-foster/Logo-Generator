@@ -2,19 +2,29 @@ const { prompt } = require("inquirer");
 const SVG = require("./library/svg");
 const { Circle, Triangle, Square } = require("./library/shapes");
 const { writeFile } = require("fs/promises");
+const { join } = require("path");
 
 prompt([
     {
-        type: "input", name: "text", message: "Input 3 characters or less."
+        type: "input",
+        name: "text",
+        message: "Input 3 characters or less."
     },
     {
-        type: "input", name: "textColor", message: "Choose a text color."
+        type: "input",
+        name: "textColor",
+        message: "Choose a text color."
     },
     {
-        type: "list", name: "shape", message: "Choose a shape.", choices: ["Circle", "Triangle", "Square"]
+        type: "list",
+        name: "shape",
+        message: "Choose a shape.",
+        choices: ["Circle", "Triangle", "Square"]
     },
     {
-        type: "input", name: "shapeColor", message: "Choose a shape color."
+        type: "input",
+        name: "shapeColor",
+        message: "Choose a shape color."
     }
 ]).then(response => {
     let shape;
@@ -30,7 +40,7 @@ prompt([
     svg.setText(response.text, response.textColor);
     svg.setShape(shape);
 
-    return writeFile("logo.svg", svg.render());
+    return writeFile(join("dist", "logo.svg"), svg.render());
 }).then(() => {
-    console.log("Generated logo.svg")
+    console.log("Generated logo.svg");
 });
