@@ -1,3 +1,5 @@
+// uses consttuctor functions and inheritance to define shape values
+
 class Shape {
     constructor () {
         this.color = "";
@@ -24,5 +26,7 @@ class Square extends Shape {
         return `<rect x="90" y="40" width="120" height="120" fill="${this.color}" />`;
     }
 }
+
+// exports the shape class for us in index.js
 
 module.exports = {Circle, Triangle, Square};

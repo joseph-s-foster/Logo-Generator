@@ -1,8 +1,12 @@
+// importing inquirer, creating the svg file, and assigning a destination to the logo
+
 const { prompt } = require("inquirer");
 const SVG = require("./library/svg");
 const { Circle, Triangle, Square } = require("./library/shapes");
 const { writeFile } = require("fs/promises");
 const { join } = require("path");
+
+// proving the user with prompts for building a logo
 
 prompt([
     {
@@ -26,6 +30,9 @@ prompt([
         name: "shapeColor",
         message: "Choose a shape color."
     }
+
+// an if else statements handles the user's input for shape generation
+    
 ]).then(response => {
     let shape;
     if (response.shape === "Circle")

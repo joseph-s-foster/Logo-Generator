@@ -1,3 +1,5 @@
+// uses a contructor function with blank strings which allow the user to assign values of their choice
+
 class SVG {
     constructor() {
         this.textEl = "";
@@ -14,5 +16,7 @@ class SVG {
         return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">${this.shapeEl}${this.textEl}</svg>`;
     }
 }
+
+// exports the SVG class for us in index.js
 
 module.exports = SVG;

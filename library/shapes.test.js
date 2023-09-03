@@ -1,3 +1,5 @@
+// tests shape type and color
+
 const { Circle, Triangle, Square } = require("./shapes");
 
 test("Should render green circle.", () => {
